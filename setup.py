@@ -1,18 +1,15 @@
-import os, assnake
+from setuptools import setup, find_packages
+from setuptools.command.develop import develop
+from setuptools.command.install import install
+from assnake.utils import get_config_loc, load_config_file
+import os, shutil
 
-import assnake_anvio.result
-from assnake.utils import read_yaml
 
-
-this_dir = os.path.dirname(os.path.abspath(__file__))
-
-snake_module = assnake.SnakeModule(
-    name = 'assnake-anvio', 
-    install_dir = this_dir,
-    results = [
-        assnake_anvio.result
-    ],
-
-    snakefiles = [],
-    invocation_commands = []
+setup(
+    name='assnake-anvio',
+    version='0.0.1',
+    packages=find_packages(),
+    entry_points = {
+        'assnake.plugins': ['assnake-anvio = assnake_anvio:snake_module']
+    }
 )
